@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import ThemeBtn from './components/ThemeButton';
-import Card from './components/Card';
-import { ThemeProvider } from './context/theme';
+import React from 'react'
+import Header from './components/Header'
+import { Route, Routes } from 'react-router-dom'
+import Checkout from './components/Checkout'
+import Home from './components/Home'
 
 const App = () => {
-  const [ themeMode, setThemeMode ] = useState();
-
-  const lightTheme = () => {
-    setThemeMode("light");
-  }
-  const darkTheme = () => {
-    setThemeMode("dark");
-  }
-
-  useEffect(() => {
-    document.querySelector('html').classList.remove("light", "dark");
-    document.querySelector('html').classList.add(themeMode);
-  }, [themeMode]);
-
   return (
-    <ThemeProvider value={{themeMode, darkTheme, lightTheme}}>
-      <ThemeBtn />
-      <Card />
-    </ThemeProvider>
+    <>
+      <Header />
+       <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/checkout' element={<Checkout />} />
+       </Routes>
+    </>
   )
 }
 
